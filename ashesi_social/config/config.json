@@ -1,0 +1,10 @@
+{
+    "mail": {
+        "MAIL_SERVER": "smtp.gmail.com",
+        "MAIL_PORT": 587,
+        "MAIL_USE_TLS": true,
+        "MAIL_USERNAME": "ashesisocial.gmail.com",
+        "MAIL_PASSWORD": "@shesi1234",
+        "MAIL_DEFAULT_SENDER": "ashesisocial.gmail.com"
+    }
+}

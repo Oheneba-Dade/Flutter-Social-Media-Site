@@ -6,8 +6,10 @@ import os
 from firebase_admin import firestore
 from flask import Flask, request, jsonify
 from flask_mail import Mail, Message
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 mail = Mail(app)
 fire_app = firebase_admin.initialize_app()
 db = firestore.client()
@@ -36,7 +38,7 @@ def register_user():
     id_ref = USERS_COLLECTION.where("id_number", "==", record["id_number"])
     id_number = id_ref.get()
     if id_number:
-        return jsonify(constants.ID_ALREADY_EXISTS_409), 409
+        return jsonify(constants.USER_ALREADY_EXISTS_409), 409
     # Check if email address already exists
     email_ref = USERS_COLLECTION.where("email", "==", record["email"])
     email = email_ref.get()

@@ -43,23 +43,15 @@ class LandingPage extends State<Login> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        'Welcome to AshTales',
-                        style: GoogleFonts.dancingScript(
-                            textStyle: const TextStyle(
-                                color: Color.fromARGB(255, 22, 81, 102),
-                                fontSize: 60,
-                                fontWeight: FontWeight.bold)),
-                      ),
                       const SizedBox(
                         height: 50,
                       ),
                       Text(
                         'Login',
-                        style: GoogleFonts.manrope(
+                        style: GoogleFonts.dancingScript(
                             textStyle: const TextStyle(
                                 color: Color.fromARGB(255, 22, 81, 102),
-                                fontSize: 45,
+                                fontSize: 60,
                                 fontWeight: FontWeight.bold)),
                       ),
                       const SizedBox(

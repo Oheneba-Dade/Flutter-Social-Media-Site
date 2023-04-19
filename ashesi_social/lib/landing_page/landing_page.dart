@@ -17,6 +17,19 @@ class LandingPage extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            'AshTales',
+            style: GoogleFonts.dancingScript(
+                textStyle: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 60,
+                    fontWeight: FontWeight.bold)),
+          ),
+        ),
+        backgroundColor: const Color.fromARGB(255, 22, 81, 102),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(50.0),
         child: Center(

@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:ashesi_social/helpers/helper_functions.dart';
+import 'package:ashesi_social/constants/constants.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -10,57 +11,6 @@ class SignUp extends StatefulWidget {
   @override
   SignUpPage createState() => SignUpPage();
 }
-
-final TextEditingController emailField = TextEditingController();
-final TextEditingController passwordField = TextEditingController();
-final TextEditingController firstNameField = TextEditingController();
-final TextEditingController lastNameField = TextEditingController();
-final TextEditingController idNumberField = TextEditingController();
-final TextEditingController dateOfBirthField = TextEditingController();
-final TextEditingController yearGroupField = TextEditingController();
-final TextEditingController bestFoodField = TextEditingController();
-final TextEditingController bestMovieField = TextEditingController();
-
-String majorField = "";
-String residenceStatusField = "";
-
-List<DropdownMenuItem<String>> _majorDropDownItems = [
-  const DropdownMenuItem(
-    value: "Computer Science",
-    child: Text("Computer Science"),
-  ),
-  const DropdownMenuItem(
-    value: "Business Administration",
-    child: Text("Business Administration"),
-  ),
-  const DropdownMenuItem(
-    value: "Management Information Systems",
-    child: Text("Management Information Systems"),
-  ),
-  const DropdownMenuItem(
-    value: "Electrical Engineering",
-    child: Text("Electrical Engineering"),
-  ),
-  const DropdownMenuItem(
-    value: "Computer Engineering",
-    child: Text("Computer Engineering"),
-  ),
-  const DropdownMenuItem(
-    value: "Mechanical Engineering",
-    child: Text("Mechanical Engineering"),
-  ),
-];
-
-List<DropdownMenuItem<String>> _residenceStatusDropDownItems = [
-  const DropdownMenuItem(
-    value: "On Campus",
-    child: Text("On Campus"),
-  ),
-  const DropdownMenuItem(
-    value: "Off Campus",
-    child: Text("Off Campus"),
-  ),
-];
 
 class SignUpPage extends State<SignUp> {
   @override
@@ -227,7 +177,7 @@ class SignUpPage extends State<SignUp> {
                                     width: 250,
                                     child: FormBuilderDropdown(
                                       name: 'major',
-                                      items: _majorDropDownItems,
+                                      items: majorDropDownItems,
                                       onChanged: (value) => {
                                         majorField = value as String,
                                       },
@@ -298,7 +248,7 @@ class SignUpPage extends State<SignUp> {
                                       width: 250,
                                       child: FormBuilderDropdown(
                                         name: "residenceStatus",
-                                        items: _residenceStatusDropDownItems,
+                                        items: residenceStatusDropDownItems,
                                         onChanged: (value) => {
                                           residenceStatusField = value as String
                                         },

@@ -35,7 +35,7 @@ def register_user():
         return jsonify(constants.NO_DATA_PROVIDED_400), 400
     record = json.loads(request.data)
     # check if id number already exists
-    id_ref = USERS_COLLECTION.where("id_number", "==", record["id_number"])
+    id_ref = USERS_COLLECTION.where("idNumber", "==", record["idNumber"])
     id_number = id_ref.get()
     if id_number:
         return jsonify(constants.USER_ALREADY_EXISTS_409), 409
@@ -54,21 +54,36 @@ def register_user():
 
 @app.route("/users", methods=["GET"])
 def get_user():
-    username = request.args.get("username")
-    user_ref = USERS_COLLECTION.where("username", "==", username).limit(1)
+    username = request.args.get("email")
+    user_ref = USERS_COLLECTION.where("email", "==", username).limit(1)
     users = user_ref.get()
     if not users:
         return jsonify(constants.USER_NOT_FOUND_404), 404
     user_dict = users[0].to_dict()
     return jsonify(user_dict), 200
 
-
-@app.route("/users/<username>", methods=["PATCH"])
-def update_user(username):
+@app.route("/users/auth", methods=["POST"])
+def authenticate_user():
     if not request.data:
         return jsonify(constants.NO_DATA_PROVIDED_400), 400
     record = json.loads(request.data)
-    user_ref = USERS_COLLECTION.where("username", "==", username).limit(1)
+    user_ref = USERS_COLLECTION.where("email", "==", record["email"]).limit(1)
+    users = user_ref.get()
+    if not users:
+        return jsonify(constants.USER_NOT_FOUND_404), 404
+    user = users[0]
+    if user.get("password") != record["password"]:
+        return jsonify(constants.INCORRECT_PASSWORD_401), 401
+    user_dict = user.to_dict()
+    return jsonify(user_dict), 200
+
+
+@app.route("/users/<email>", methods=["PATCH"])
+def update_user(email):
+    if not request.data:
+        return jsonify(constants.NO_DATA_PROVIDED_400), 400
+    record = json.loads(request.data)
+    user_ref = USERS_COLLECTION.where("email", "==", email).limit(1)
     users = user_ref.get()
     if not users:
         return jsonify(constants.USER_NOT_FOUND_404), 404
@@ -96,7 +111,7 @@ def create_post():
         user_emails = []
         for user in USERS_COLLECTION.stream():
             user_emails.append(user.to_dict()["email"])
-        send_email(user_emails, "New Post Alert!", f"{record['username']} made a new post.")
+        send_email(user_emails, "New Post Alert!", f"{record['email']} made a new post.")
     except Exception:
         return jsonify(constants.INTERNAL_SERVER_ERROR_500), 500
     return jsonify(record), 200

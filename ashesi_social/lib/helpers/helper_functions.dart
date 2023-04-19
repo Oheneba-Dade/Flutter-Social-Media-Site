@@ -1,8 +1,41 @@
+import 'package:ashesi_social/auth/login_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:ashesi_social/auth/login_auth.dart';
+import 'package:provider/provider.dart';
 
 var headers = {'Content-Type': 'application/json'};
+
+Future<void> loginUser(
+    BuildContext context, String email, String password) async {
+  String url = "http://127.0.0.1:5000/users/auth";
+  var request = http.Request('POST', Uri.parse(url));
+
+  request.body = json.encode({"email": email, "password": password});
+  request.headers.addAll(headers);
+  http.StreamedResponse response = await request.send();
+
+  if (response.statusCode == 200) {
+    // ignore: use_build_context_synchronously
+    Navigator.pushNamed(context, '/editProfile');
+    final loginResponse = jsonDecode(await response.stream.bytesToString());
+    // ignore: use_build_context_synchronously
+    Provider.of<UserProvider>(context, listen: false)
+        .setUserEmail(loginResponse['email']);
+    // ignore: use_build_context_synchronously, unused_local_variable
+  } else {
+    // ignore: use_build_context_synchronously
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return const AlertDialog(
+            title: Text("Failed"),
+            content: Text("You have not been logged in"),
+          );
+        });
+  }
+}
 
 Future<void> postProfileData(
     BuildContext context,
@@ -21,17 +54,17 @@ Future<void> postProfileData(
   var request = http.Request('POST', Uri.parse(url));
 
   request.body = json.encode({
-    "first_name": firstName,
-    "last_name": lastName,
+    "firstName": firstName,
+    "lastName": lastName,
     "email": email,
-    "id_number": idNumber,
-    "date_of_birth": dateOfBirth,
+    "idNumber": idNumber,
+    "dateOfBirth": dateOfBirth,
     "major": major,
-    "year_group": yearGroup,
+    "yearGroup": yearGroup,
     "password": password,
-    "residence_status": residenceStatus,
-    "best_food": bestFood,
-    "best_movie": bestMovie
+    "residenceStatus": residenceStatus,
+    "bestFood": bestFood,
+    "bestMovie": bestMovie
   });
 
   request.headers.addAll(headers);
@@ -39,14 +72,7 @@ Future<void> postProfileData(
 
   if (response.statusCode == 200) {
     // ignore: use_build_context_synchronously
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return const AlertDialog(
-            title: Text("Success"),
-            content: Text("Your profile has been created"),
-          );
-        });
+    Navigator.pushNamed(context, '/login');
   } else if (response.statusCode == 409) {
     // ignore: use_build_context_synchronously
     showDialog(
@@ -65,6 +91,79 @@ Future<void> postProfileData(
           return const AlertDialog(
             title: Text("Failed"),
             content: Text("Your profile has not been created"),
+          );
+        });
+  }
+}
+
+Future<Map<String, dynamic>> getProfileData(String email) async {
+  String url = "http://127.0.0.1:5000/users";
+  var uri = Uri.parse(url).replace(queryParameters: {"email": email});
+  var request = http.Request('GET', uri);
+
+  request.headers.addAll(headers);
+  http.StreamedResponse response = await request.send();
+
+  if (response.statusCode == 200) {
+    var data = await response.stream.bytesToString();
+    return json.decode(data);
+  } else {
+    return {};
+  }
+}
+
+Future<void> updateProfileData(
+    BuildContext context,
+    String firstName,
+    String lastName,
+    String email,
+    String idNumber,
+    String dateOfBirth,
+    String major,
+    String yearGroup,
+    String password,
+    String residenceStatus,
+    String bestFood,
+    String bestMovie) async {
+  String url = "http://127.0.0.1:5000/users/";
+  url += Provider.of<UserProvider>(context, listen: false).userEmail;
+  var request = http.Request('PATCH', Uri.parse(url));
+
+  request.body = json.encode({
+    "firstName": firstName,
+    "lastName": lastName,
+    "email": email,
+    "idNumber": idNumber,
+    "dateOfBirth": dateOfBirth,
+    "major": major,
+    "yearGroup": yearGroup,
+    "password": password,
+    "residenceStatus": residenceStatus,
+    "bestFood": bestFood,
+    "bestMovie": bestMovie
+  });
+
+  request.headers.addAll(headers);
+  http.StreamedResponse response = await request.send();
+
+  if (response.statusCode == 200) {
+    // ignore: use_build_context_synchronously
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return const AlertDialog(
+            title: Text("Success"),
+            content: Text("Your profile has been updated"),
+          );
+        });
+  } else {
+    // ignore: use_build_context_synchronously
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return const AlertDialog(
+            title: Text("Failed"),
+            content: Text("Your profile has not been updated"),
           );
         });
   }

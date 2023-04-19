@@ -1,3 +1,4 @@
+import 'package:ashesi_social/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -82,6 +83,7 @@ class LandingPage extends State<Login> {
                         width: 400,
                         child: FormBuilderTextField(
                           name: 'password',
+                          obscureText: true,
                           controller: passwordField,
                           style: GoogleFonts.manrope(
                               textStyle: const TextStyle(
@@ -101,8 +103,8 @@ class LandingPage extends State<Login> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          print(emailField.text);
-                          print(passwordField.text);
+                          loginUser(
+                              context, emailField.text, passwordField.text);
                         },
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size(175, 65),
@@ -119,6 +121,35 @@ class LandingPage extends State<Login> {
                         ),
                         child: const Text('Let Me In!'),
                       ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Don\'t have an account?',
+                            style: GoogleFonts.manrope(
+                                textStyle: const TextStyle(
+                              color: Color.fromARGB(255, 22, 81, 102),
+                              fontSize: 20,
+                            )),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/signup');
+                            },
+                            child: Text(
+                              'Sign Up',
+                              style: GoogleFonts.manrope(
+                                  textStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 22, 81, 102),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),

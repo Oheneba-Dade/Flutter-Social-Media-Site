@@ -1,6 +1,10 @@
+import 'package:ashesi_social/auth/login_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ashesi_social/landing_page/landing_page.dart';
 import 'package:ashesi_social/signup_page/signup_page.dart';
+import 'package:ashesi_social/edit_profile_page/edit_profile.dart';
+import 'package:ashesi_social/auth/login_auth.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,12 +15,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Ashesi Social',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const Login(),
-    );
+    return ChangeNotifierProvider<UserProvider>(
+        create: (_) => UserProvider(),
+        child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Ashesi Social',
+            home: Login(),
+            routes: {
+              '/signup': (context) => const SignUp(),
+              '/login': (context) => const Login(),
+              '/editProfile': (context) => const EditProfile(),
+            }));
   }
 }

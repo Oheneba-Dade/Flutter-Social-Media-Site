@@ -20,11 +20,11 @@ class LandingPage extends State<Login> {
       appBar: AppBar(
         title: Center(
           child: Text(
-            'AshTales',
+            'AshTales🎤',
             style: GoogleFonts.dancingScript(
                 textStyle: const TextStyle(
                     color: Colors.white,
-                    fontSize: 60,
+                    fontSize: 55,
                     fontWeight: FontWeight.bold)),
           ),
         ),

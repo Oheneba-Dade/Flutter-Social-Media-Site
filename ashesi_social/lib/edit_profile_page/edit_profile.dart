@@ -46,6 +46,19 @@ class EditProfilePage extends State<EditProfile> {
       }
     }
     return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            'AshTales🎤',
+            style: GoogleFonts.dancingScript(
+                textStyle: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 55,
+                    fontWeight: FontWeight.bold)),
+          ),
+        ),
+        backgroundColor: const Color.fromARGB(255, 22, 81, 102),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

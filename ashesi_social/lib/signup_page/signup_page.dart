@@ -16,343 +16,361 @@ class SignUpPage extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-      children: [
-        Positioned.fill(
-          child: SvgPicture.asset(
-            'images/pattern.svg',
-            fit: BoxFit.cover,
+        appBar: AppBar(
+          title: Center(
+            child: Text(
+              'AshTales🎤',
+              style: GoogleFonts.dancingScript(
+                  textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 55,
+                      fontWeight: FontWeight.bold)),
+            ),
           ),
+          backgroundColor: const Color.fromARGB(255, 22, 81, 102),
         ),
-        Positioned.fill(
-          child: Padding(
-              padding: const EdgeInsets.all(50.0),
-              child: Center(
-                  child: SizedBox(
-                      width: double.maxFinite,
-                      child: Row(
-                        children: [
-                          Column(
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: SvgPicture.asset(
+                'images/pattern.svg',
+                fit: BoxFit.cover,
+              ),
+            ),
+            Positioned.fill(
+              child: Padding(
+                  padding: const EdgeInsets.all(50.0),
+                  child: Center(
+                      child: SizedBox(
+                          width: double.maxFinite,
+                          child: Row(
                             children: [
-                              Image.asset(
-                                'images/signup_banner.png',
-                                width: 600,
-                                height: 650,
+                              Column(
+                                children: [
+                                  Image.asset(
+                                    'images/signup_banner.png',
+                                    width: 600,
+                                    height: 550,
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    'Sign Up',
+                                    style: GoogleFonts.dancingScript(
+                                        textStyle: const TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 22, 81, 102),
+                                            fontSize: 60,
+                                            fontWeight: FontWeight.bold)),
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                          width: 350,
+                                          child: FormBuilderTextField(
+                                            name: 'first_name',
+                                            controller: firstNameField,
+                                            style: GoogleFonts.manrope(
+                                                textStyle: const TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 22, 81, 102),
+                                              height: 2,
+                                            )),
+                                            decoration: InputDecoration(
+                                                labelText: 'First Name',
+                                                hintStyle: GoogleFonts.manrope(
+                                                    textStyle: const TextStyle(
+                                                  color: Colors.grey,
+                                                ))),
+                                          )),
+                                      const SizedBox(
+                                        width: 40,
+                                      ),
+                                      SizedBox(
+                                          width: 350,
+                                          child: FormBuilderTextField(
+                                            name: 'last_name',
+                                            controller: lastNameField,
+                                            style: GoogleFonts.manrope(
+                                                textStyle: const TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 22, 81, 102),
+                                              height: 2,
+                                            )),
+                                            decoration: InputDecoration(
+                                                labelText: 'Last Name',
+                                                hintStyle: GoogleFonts.manrope(
+                                                    textStyle: const TextStyle(
+                                                  color: Colors.grey,
+                                                ))),
+                                          ))
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                          width: 350,
+                                          child: FormBuilderTextField(
+                                            name: 'email',
+                                            controller: emailField,
+                                            style: GoogleFonts.manrope(
+                                                textStyle: const TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 22, 81, 102),
+                                              height: 2,
+                                            )),
+                                            decoration: InputDecoration(
+                                                labelText: 'Email Address',
+                                                hintStyle: GoogleFonts.manrope(
+                                                    textStyle: const TextStyle(
+                                                  color: Colors.grey,
+                                                ))),
+                                          )),
+                                      const SizedBox(
+                                        width: 40,
+                                      ),
+                                      SizedBox(
+                                          width: 350,
+                                          child: FormBuilderTextField(
+                                            name: 'id_number',
+                                            controller: idNumberField,
+                                            style: GoogleFonts.manrope(
+                                                textStyle: const TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 22, 81, 102),
+                                              height: 2,
+                                            )),
+                                            decoration: InputDecoration(
+                                                labelText: 'ID Number',
+                                                hintStyle: GoogleFonts.manrope(
+                                                    textStyle: const TextStyle(
+                                                  color: Colors.grey,
+                                                ))),
+                                          ))
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 150,
+                                        child: FormBuilderDateTimePicker(
+                                          inputType: InputType.date,
+                                          name: 'date_of_birth',
+                                          controller: dateOfBirthField,
+                                          style: GoogleFonts.manrope(
+                                              textStyle: const TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 22, 81, 102),
+                                            height: 2,
+                                          )),
+                                          decoration: InputDecoration(
+                                              labelText: 'Date of Birth',
+                                              hintStyle: GoogleFonts.manrope(
+                                                  textStyle: const TextStyle(
+                                                color: Colors.grey,
+                                              ))),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 90,
+                                      ),
+                                      SizedBox(
+                                        width: 250,
+                                        child: FormBuilderDropdown(
+                                          name: 'major',
+                                          items: majorDropDownItems,
+                                          onChanged: (value) => {
+                                            majorField = value as String,
+                                          },
+                                          style: GoogleFonts.manrope(
+                                              textStyle: const TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 22, 81, 102),
+                                            height: 2,
+                                          )),
+                                          decoration: InputDecoration(
+                                              labelText: 'Major',
+                                              labelStyle: GoogleFonts.manrope(
+                                                  textStyle: const TextStyle(
+                                                color: Colors.grey,
+                                              ))),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 90,
+                                      ),
+                                      SizedBox(
+                                        width: 150,
+                                        child: FormBuilderTextField(
+                                          name: 'year_group',
+                                          controller: yearGroupField,
+                                          style: GoogleFonts.manrope(
+                                              textStyle: const TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 22, 81, 102),
+                                            height: 2,
+                                          )),
+                                          decoration: InputDecoration(
+                                              labelText: 'Year Group',
+                                              hintStyle: GoogleFonts.manrope(
+                                                  textStyle: const TextStyle(
+                                                color: Colors.grey,
+                                              ))),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                          width: 320,
+                                          child: FormBuilderTextField(
+                                            obscureText: true,
+                                            name: 'password',
+                                            controller: passwordField,
+                                            style: GoogleFonts.manrope(
+                                                textStyle: const TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 22, 81, 102),
+                                              height: 2,
+                                            )),
+                                            decoration: InputDecoration(
+                                                labelText: 'Password',
+                                                hintStyle: GoogleFonts.manrope(
+                                                    textStyle: const TextStyle(
+                                                  color: Colors.grey,
+                                                ))),
+                                          )),
+                                      const SizedBox(
+                                        width: 160,
+                                      ),
+                                      SizedBox(
+                                          width: 250,
+                                          child: FormBuilderDropdown(
+                                            name: "residenceStatus",
+                                            items: residenceStatusDropDownItems,
+                                            onChanged: (value) => {
+                                              residenceStatusField =
+                                                  value as String
+                                            },
+                                            style: GoogleFonts.manrope(
+                                                textStyle: const TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 22, 81, 102),
+                                              height: 2,
+                                            )),
+                                            decoration: InputDecoration(
+                                                labelText: 'Residence Status',
+                                                labelStyle: GoogleFonts.manrope(
+                                                    textStyle: const TextStyle(
+                                                  color: Colors.grey,
+                                                ))),
+                                          ))
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                          width: 350,
+                                          child: FormBuilderTextField(
+                                            name: 'best_food',
+                                            controller: bestFoodField,
+                                            style: GoogleFonts.manrope(
+                                                textStyle: const TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 22, 81, 102),
+                                              height: 2,
+                                            )),
+                                            decoration: InputDecoration(
+                                                labelText: 'Best Food',
+                                                hintStyle: GoogleFonts.manrope(
+                                                    textStyle: const TextStyle(
+                                                  color: Colors.grey,
+                                                ))),
+                                          )),
+                                      const SizedBox(
+                                        width: 40,
+                                      ),
+                                      SizedBox(
+                                          width: 350,
+                                          child: FormBuilderTextField(
+                                            name: 'best_movie',
+                                            controller: bestMovieField,
+                                            style: GoogleFonts.manrope(
+                                                textStyle: const TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 22, 81, 102),
+                                              height: 2,
+                                            )),
+                                            decoration: InputDecoration(
+                                                labelText: 'Best Movie',
+                                                hintStyle: GoogleFonts.manrope(
+                                                    textStyle: const TextStyle(
+                                                  color: Colors.grey,
+                                                ))),
+                                          )),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      postProfileData(
+                                          context,
+                                          firstNameField.text,
+                                          lastNameField.text,
+                                          emailField.text,
+                                          idNumberField.text,
+                                          dateOfBirthField.text,
+                                          majorField,
+                                          yearGroupField.text,
+                                          passwordField.text,
+                                          residenceStatusField,
+                                          bestFoodField.text,
+                                          bestMovieField.text);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      minimumSize: const Size(175, 65),
+                                      backgroundColor: const Color.fromARGB(
+                                          255, 22, 81, 102),
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10))),
+                                      textStyle: GoogleFonts.manrope(
+                                          textStyle: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                      )),
+                                    ),
+                                    child: const Text('Create Account'),
+                                  )
+                                ],
                               )
                             ],
-                          ),
-                          const SizedBox(
-                            width: 50,
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                'Sign Up',
-                                style: GoogleFonts.dancingScript(
-                                    textStyle: const TextStyle(
-                                        color: Color.fromARGB(255, 22, 81, 102),
-                                        fontSize: 60,
-                                        fontWeight: FontWeight.bold)),
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                      width: 350,
-                                      child: FormBuilderTextField(
-                                        name: 'first_name',
-                                        controller: firstNameField,
-                                        style: GoogleFonts.manrope(
-                                            textStyle: const TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 22, 81, 102),
-                                          height: 2,
-                                        )),
-                                        decoration: InputDecoration(
-                                            labelText: 'First Name',
-                                            hintStyle: GoogleFonts.manrope(
-                                                textStyle: const TextStyle(
-                                              color: Colors.grey,
-                                            ))),
-                                      )),
-                                  const SizedBox(
-                                    width: 40,
-                                  ),
-                                  SizedBox(
-                                      width: 350,
-                                      child: FormBuilderTextField(
-                                        name: 'last_name',
-                                        controller: lastNameField,
-                                        style: GoogleFonts.manrope(
-                                            textStyle: const TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 22, 81, 102),
-                                          height: 2,
-                                        )),
-                                        decoration: InputDecoration(
-                                            labelText: 'Last Name',
-                                            hintStyle: GoogleFonts.manrope(
-                                                textStyle: const TextStyle(
-                                              color: Colors.grey,
-                                            ))),
-                                      ))
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                      width: 350,
-                                      child: FormBuilderTextField(
-                                        name: 'email',
-                                        controller: emailField,
-                                        style: GoogleFonts.manrope(
-                                            textStyle: const TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 22, 81, 102),
-                                          height: 2,
-                                        )),
-                                        decoration: InputDecoration(
-                                            labelText: 'Email Address',
-                                            hintStyle: GoogleFonts.manrope(
-                                                textStyle: const TextStyle(
-                                              color: Colors.grey,
-                                            ))),
-                                      )),
-                                  const SizedBox(
-                                    width: 40,
-                                  ),
-                                  SizedBox(
-                                      width: 350,
-                                      child: FormBuilderTextField(
-                                        name: 'id_number',
-                                        controller: idNumberField,
-                                        style: GoogleFonts.manrope(
-                                            textStyle: const TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 22, 81, 102),
-                                          height: 2,
-                                        )),
-                                        decoration: InputDecoration(
-                                            labelText: 'ID Number',
-                                            hintStyle: GoogleFonts.manrope(
-                                                textStyle: const TextStyle(
-                                              color: Colors.grey,
-                                            ))),
-                                      ))
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: 150,
-                                    child: FormBuilderDateTimePicker(
-                                      inputType: InputType.date,
-                                      name: 'date_of_birth',
-                                      controller: dateOfBirthField,
-                                      style: GoogleFonts.manrope(
-                                          textStyle: const TextStyle(
-                                        color: Color.fromARGB(255, 22, 81, 102),
-                                        height: 2,
-                                      )),
-                                      decoration: InputDecoration(
-                                          labelText: 'Date of Birth',
-                                          hintStyle: GoogleFonts.manrope(
-                                              textStyle: const TextStyle(
-                                            color: Colors.grey,
-                                          ))),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 90,
-                                  ),
-                                  SizedBox(
-                                    width: 250,
-                                    child: FormBuilderDropdown(
-                                      name: 'major',
-                                      items: majorDropDownItems,
-                                      onChanged: (value) => {
-                                        majorField = value as String,
-                                      },
-                                      style: GoogleFonts.manrope(
-                                          textStyle: const TextStyle(
-                                        color: Color.fromARGB(255, 22, 81, 102),
-                                        height: 2,
-                                      )),
-                                      decoration: InputDecoration(
-                                          labelText: 'Major',
-                                          labelStyle: GoogleFonts.manrope(
-                                              textStyle: const TextStyle(
-                                            color: Colors.grey,
-                                          ))),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 90,
-                                  ),
-                                  SizedBox(
-                                    width: 150,
-                                    child: FormBuilderTextField(
-                                      name: 'year_group',
-                                      controller: yearGroupField,
-                                      style: GoogleFonts.manrope(
-                                          textStyle: const TextStyle(
-                                        color: Color.fromARGB(255, 22, 81, 102),
-                                        height: 2,
-                                      )),
-                                      decoration: InputDecoration(
-                                          labelText: 'Year Group',
-                                          hintStyle: GoogleFonts.manrope(
-                                              textStyle: const TextStyle(
-                                            color: Colors.grey,
-                                          ))),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                      width: 320,
-                                      child: FormBuilderTextField(
-                                        obscureText: true,
-                                        name: 'password',
-                                        controller: passwordField,
-                                        style: GoogleFonts.manrope(
-                                            textStyle: const TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 22, 81, 102),
-                                          height: 2,
-                                        )),
-                                        decoration: InputDecoration(
-                                            labelText: 'Password',
-                                            hintStyle: GoogleFonts.manrope(
-                                                textStyle: const TextStyle(
-                                              color: Colors.grey,
-                                            ))),
-                                      )),
-                                  const SizedBox(
-                                    width: 160,
-                                  ),
-                                  SizedBox(
-                                      width: 250,
-                                      child: FormBuilderDropdown(
-                                        name: "residenceStatus",
-                                        items: residenceStatusDropDownItems,
-                                        onChanged: (value) => {
-                                          residenceStatusField = value as String
-                                        },
-                                        style: GoogleFonts.manrope(
-                                            textStyle: const TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 22, 81, 102),
-                                          height: 2,
-                                        )),
-                                        decoration: InputDecoration(
-                                            labelText: 'Residence Status',
-                                            labelStyle: GoogleFonts.manrope(
-                                                textStyle: const TextStyle(
-                                              color: Colors.grey,
-                                            ))),
-                                      ))
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                      width: 350,
-                                      child: FormBuilderTextField(
-                                        name: 'best_food',
-                                        controller: bestFoodField,
-                                        style: GoogleFonts.manrope(
-                                            textStyle: const TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 22, 81, 102),
-                                          height: 2,
-                                        )),
-                                        decoration: InputDecoration(
-                                            labelText: 'Best Food',
-                                            hintStyle: GoogleFonts.manrope(
-                                                textStyle: const TextStyle(
-                                              color: Colors.grey,
-                                            ))),
-                                      )),
-                                  const SizedBox(
-                                    width: 40,
-                                  ),
-                                  SizedBox(
-                                      width: 350,
-                                      child: FormBuilderTextField(
-                                        name: 'best_movie',
-                                        controller: bestMovieField,
-                                        style: GoogleFonts.manrope(
-                                            textStyle: const TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 22, 81, 102),
-                                          height: 2,
-                                        )),
-                                        decoration: InputDecoration(
-                                            labelText: 'Best Movie',
-                                            hintStyle: GoogleFonts.manrope(
-                                                textStyle: const TextStyle(
-                                              color: Colors.grey,
-                                            ))),
-                                      )),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  postProfileData(
-                                      context,
-                                      firstNameField.text,
-                                      lastNameField.text,
-                                      emailField.text,
-                                      idNumberField.text,
-                                      dateOfBirthField.text,
-                                      majorField,
-                                      yearGroupField.text,
-                                      passwordField.text,
-                                      residenceStatusField,
-                                      bestFoodField.text,
-                                      bestMovieField.text);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  minimumSize: const Size(175, 65),
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 22, 81, 102),
-                                  shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10))),
-                                  textStyle: GoogleFonts.manrope(
-                                      textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                  )),
-                                ),
-                                child: const Text('Create Account'),
-                              )
-                            ],
-                          )
-                        ],
-                      )))),
-        ),
-      ],
-    ));
+                          )))),
+            ),
+          ],
+        ));
   }
 }

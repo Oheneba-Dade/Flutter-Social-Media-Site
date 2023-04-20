@@ -2,6 +2,7 @@ import 'package:ashesi_social/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:ashesi_social/widgets/ashtales_appbar.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -17,19 +18,7 @@ class LandingPage extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text(
-            'AshTales🎤',
-            style: GoogleFonts.dancingScript(
-                textStyle: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 55,
-                    fontWeight: FontWeight.bold)),
-          ),
-        ),
-        backgroundColor: const Color.fromARGB(255, 22, 81, 102),
-      ),
+      appBar: const ApplicationToolbar(),
       body: Padding(
         padding: const EdgeInsets.all(50.0),
         child: Center(
@@ -132,7 +121,7 @@ class LandingPage extends State<Login> {
                             fontSize: 20,
                           )),
                         ),
-                        child: const Text('Let Me In!'),
+                        child: const Text('Submit'),
                       ),
                       const SizedBox(
                         height: 30,

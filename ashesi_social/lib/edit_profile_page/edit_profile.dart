@@ -5,6 +5,7 @@ import 'package:ashesi_social/helpers/helper_functions.dart';
 import 'package:ashesi_social/constants/constants.dart';
 import 'package:ashesi_social/auth/login_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:ashesi_social/widgets/ashtales_appbar.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
@@ -46,19 +47,7 @@ class EditProfilePage extends State<EditProfile> {
       }
     }
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text(
-            'AshTales🎤',
-            style: GoogleFonts.dancingScript(
-                textStyle: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 55,
-                    fontWeight: FontWeight.bold)),
-          ),
-        ),
-        backgroundColor: const Color.fromARGB(255, 22, 81, 102),
-      ),
+      appBar: const ApplicationToolbar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

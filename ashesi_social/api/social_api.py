@@ -1,30 +1,18 @@
 import json
 import firebase_admin
-import functions_framework
 import constants
 import os
 from firebase_admin import firestore
 from flask import Flask, request, jsonify
-from flask_mail import Mail, Message
 from flask_cors import CORS
+from datetime import datetime
 
 app = Flask(__name__)
 CORS(app)
-mail = Mail(app)
 fire_app = firebase_admin.initialize_app()
 db = firestore.client()
 
-file_path = os.path.join(os.getcwd(), "ashesi_social\config\config.json")
-with open(file_path, "r") as config_file:
-    config_data = json.load(config_file)
-    mail_config = config_data["mail"]
 
-MAIL_SERVER = mail_config["MAIL_SERVER"]
-MAIL_PORT = mail_config["MAIL_PORT"]
-MAIL_USE_TLS = mail_config["MAIL_USE_TLS"]
-MAIL_USERNAME = mail_config["MAIL_USERNAME"]
-MAIL_PASSWORD = mail_config["MAIL_PASSWORD"]
-MAIL_DEFAULT_SENDER = mail_config["MAIL_DEFAULT_SENDER"]
 USERS_COLLECTION = db.collection("users")
 POSTS_COLLECTION = db.collection("posts")
 
@@ -106,32 +94,13 @@ def create_post():
     record = json.loads(request.data)
     try:
         new_doc_ref = POSTS_COLLECTION.document()
+        current_time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+        record["posted_at"] = current_time
         new_doc_ref.set(record)
-        
-        user_emails = []
-        for user in USERS_COLLECTION.stream():
-            user_emails.append(user.to_dict()["email"])
-        send_email(user_emails, "New Post Alert!", f"{record['email']} made a new post.")
     except Exception:
         return jsonify(constants.INTERNAL_SERVER_ERROR_500), 500
     return jsonify(record), 200
 
-"""
-HELPER FUNCTIONS
-"""
-def send_email(email, subject, message):
-    """
-    This function sends an email with a specified subject and message to a specified recipient email
-    address.
-    
-    :param email: The email address of the recipient to whom the email will be sent
-    :param subject: The subject of the email that will be sent. It should be a string
-    :param message: The message parameter is the body of the email that will be sent to the recipient.
-    It can be a string containing any text or HTML content that you want to include in the email
-    """
-    msg = Message(subject, recipients=[email])
-    msg.body = message
-    mail.send(msg)
 
 if __name__ == "__main__":
     app.run()

@@ -1,7 +1,6 @@
 import json
 import firebase_admin
 import constants
-import os
 from firebase_admin import firestore
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -95,9 +94,10 @@ def create_post():
     try:
         new_doc_ref = POSTS_COLLECTION.document()
         current_time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
-        record["posted_at"] = current_time
+        record["postedAt"] = current_time
         new_doc_ref.set(record)
     except Exception:
+        print(Exception)
         return jsonify(constants.INTERNAL_SERVER_ERROR_500), 500
     return jsonify(record), 200
 

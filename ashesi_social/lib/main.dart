@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:ashesi_social/landing_page/landing_page.dart';
 import 'package:ashesi_social/signup_page/signup_page.dart';
 import 'package:ashesi_social/edit_profile_page/edit_profile.dart';
-import 'package:ashesi_social/auth/login_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:ashesi_social/view_page/view_page.dart';
 
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Ashesi Social',
-            home: Login(),
+            home: const Login(),
             routes: {
               '/signup': (context) => const SignUp(),
               '/login': (context) => const Login(),

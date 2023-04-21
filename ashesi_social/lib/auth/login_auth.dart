@@ -17,4 +17,10 @@ class UserProvider extends ChangeNotifier {
     firstName = name;
     notifyListeners();
   }
+
+  void clearUserInfo() {
+    userEmail = '';
+    firstName = '';
+    notifyListeners();
+  }
 }

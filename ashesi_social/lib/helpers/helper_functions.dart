@@ -18,7 +18,7 @@ Future<void> loginUser(
 
   if (response.statusCode == 200) {
     // ignore: use_build_context_synchronously
-    Navigator.pushNamed(context, '/editProfile');
+    Navigator.pushNamed(context, '/feed');
     final loginResponse = jsonDecode(await response.stream.bytesToString());
     // ignore: use_build_context_synchronously
     Provider.of<UserProvider>(context, listen: false)
@@ -167,6 +167,31 @@ Future<void> updateProfileData(
           return const AlertDialog(
             title: Text("Failed"),
             content: Text("Your profile has not been updated"),
+          );
+        });
+  }
+}
+
+Future<void> createPost(
+    BuildContext context, String content, String email) async {
+  String url = "http://127.0.0.1:5000/posts";
+  var request = http.Request('POST', Uri.parse(url));
+
+  request.body = json.encode({"content": content, "email": email});
+  request.headers.addAll(headers);
+  http.StreamedResponse response = await request.send();
+
+  if (response.statusCode == 200) {
+    // ignore: use_build_context_synchronously
+    Navigator.pushNamed(context, '/feed');
+  } else {
+    // ignore: use_build_context_synchronously
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return const AlertDialog(
+            title: Text("Failed"),
+            content: Text("Your post has not been created"),
           );
         });
   }

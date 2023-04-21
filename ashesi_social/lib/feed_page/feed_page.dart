@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:ashesi_social/auth/login_auth.dart';
 import 'package:ashesi_social/widgets/ashtales_appbar.dart';
+import 'package:ashesi_social/widgets/post_modal.dart';
 
 class FeedPage extends StatefulWidget {
   const FeedPage({Key? key}) : super(key: key);
@@ -12,6 +13,20 @@ class FeedPage extends StatefulWidget {
 }
 
 class FeedPageState extends State<FeedPage> {
+  bool _isModalOpen = false;
+
+  void _openModal() {
+    setState(() {
+      _isModalOpen = true;
+    });
+  }
+
+  void _closeModal() {
+    setState(() {
+      _isModalOpen = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,12 +65,16 @@ class FeedPageState extends State<FeedPage> {
                       color: const Color.fromARGB(255, 22, 81, 102),
                     ),
                     const SizedBox(width: 10),
-                    Text('View Profile',
-                        style: GoogleFonts.manrope(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: const Color.fromARGB(255, 22, 81, 102),
-                        ))
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/viewProfile');
+                        },
+                        child: Text('View Profile',
+                            style: GoogleFonts.manrope(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: const Color.fromARGB(255, 22, 81, 102),
+                            )))
                   ],
                 ),
                 const SizedBox(height: 30),
@@ -68,12 +87,17 @@ class FeedPageState extends State<FeedPage> {
                       color: const Color.fromARGB(255, 22, 81, 102),
                     ),
                     const SizedBox(width: 10),
-                    Text('Logout',
-                        style: GoogleFonts.manrope(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: const Color.fromARGB(255, 22, 81, 102),
-                        ))
+                    TextButton(
+                        onPressed: () {
+                          context.read<UserProvider>().clearUserInfo();
+                          Navigator.pushNamed(context, '/login');
+                        },
+                        child: Text('Logout',
+                            style: GoogleFonts.manrope(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: const Color.fromARGB(255, 22, 81, 102),
+                            )))
                   ],
                 ),
               ],
@@ -126,7 +150,7 @@ class FeedPageState extends State<FeedPage> {
                     Center(
                       child: FloatingActionButton(
                         onPressed: () {
-                          // Add your onPressed code here!
+                          _openModal();
                         },
                         backgroundColor: Colors.white,
                         child: const Icon(
@@ -142,6 +166,7 @@ class FeedPageState extends State<FeedPage> {
           ),
         ],
       ),
+      floatingActionButton: _isModalOpen ? MyModal() : null,
     );
   }
 }

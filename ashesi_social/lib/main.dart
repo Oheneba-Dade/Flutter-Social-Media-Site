@@ -22,12 +22,13 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Ashesi Social',
-            home: FeedPage(),
+            home: Login(),
             routes: {
               '/signup': (context) => const SignUp(),
               '/login': (context) => const Login(),
               '/editProfile': (context) => const EditProfile(),
               '/viewProfile': (context) => const ViewProfile(),
+              '/feed': (context) => const FeedPage(),
             }));
   }
 }

@@ -55,6 +55,11 @@ class MyModal extends StatelessWidget {
             const SizedBox(height: 30),
             TextField(
               keyboardType: TextInputType.multiline,
+              style: GoogleFonts.manrope(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: const Color.fromARGB(255, 22, 81, 102),
+              ),
               maxLines: 7,
               controller: createPostController,
               decoration: const InputDecoration(

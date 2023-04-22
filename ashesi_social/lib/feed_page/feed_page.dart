@@ -153,7 +153,7 @@ class FeedPageState extends State<FeedPage> {
                           TextButton(
                             onPressed: () {},
                             child: Text(
-                              'Trending',
+                              'Trending Posts',
                               style: GoogleFonts.manrope(
                                 fontSize: 35,
                                 fontWeight: FontWeight.bold,
@@ -238,7 +238,7 @@ class FeedPageState extends State<FeedPage> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 20),
                     SizedBox(
                       height: 40,
                       child: ElevatedButton(

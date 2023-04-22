@@ -1,3 +1,5 @@
+import 'package:ashesi_social/constants/constants.dart';
+import 'package:ashesi_social/functions/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +51,7 @@ class FeedPageState extends State<FeedPage> {
               children: [
                 const SizedBox(height: 200),
                 Center(
-                    child: Text('Oheneba',
+                    child: Text(context.watch<UserProvider>().firstName,
                         style: GoogleFonts.dancingScript(
                           fontSize: 50,
                           fontWeight: FontWeight.bold,
@@ -62,7 +64,7 @@ class FeedPageState extends State<FeedPage> {
                     const Icon(
                       Icons.person,
                       size: 40,
-                      color: const Color.fromARGB(255, 22, 81, 102),
+                      color: Color.fromARGB(255, 22, 81, 102),
                     ),
                     const SizedBox(width: 10),
                     TextButton(
@@ -84,7 +86,7 @@ class FeedPageState extends State<FeedPage> {
                     const Icon(
                       Icons.logout,
                       size: 40,
-                      color: const Color.fromARGB(255, 22, 81, 102),
+                      color: Color.fromARGB(255, 22, 81, 102),
                     ),
                     const SizedBox(width: 10),
                     TextButton(
@@ -108,12 +110,34 @@ class FeedPageState extends State<FeedPage> {
             child: SingleChildScrollView(
               child: Container(
                 color: Colors.white,
-                child: const Center(
-                  child: Text(
-                    'Column 2',
-                    style: TextStyle(
-                      color: const Color.fromARGB(255, 22, 81, 102),
-                    ),
+                child: Center(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 20),
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Trending',
+                                style: GoogleFonts.manrope(
+                                  fontSize: 35,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color.fromARGB(255, 22, 81, 102),
+                                ),
+                              ),
+                            ),
+                            const Icon(
+                              Icons.newspaper,
+                              size: 40,
+                              color: Color.fromARGB(255, 22, 81, 102),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
@@ -133,29 +157,97 @@ class FeedPageState extends State<FeedPage> {
             child: Column(
               children: [
                 const SizedBox(height: 200),
-                const Center(
-                  child: Text(
-                    'Essentials',
-                    style: TextStyle(
-                      color: const Color.fromARGB(255, 22, 81, 102),
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold,
+                Center(
+                    child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton(
+                            onPressed: () {},
+                            child: Text('Discover People',
+                                style: GoogleFonts.manrope(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color.fromARGB(255, 22, 81, 102),
+                                ))),
+                        const Icon(
+                          Icons.search,
+                          size: 40,
+                          color: Color.fromARGB(255, 22, 81, 102),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
+                    const SizedBox(height: 30),
+                    Container(
+                      width: 500,
+                      child: Row(
+                        children: [
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: TextField(
+                              style: GoogleFonts.manrope(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: const Color.fromARGB(255, 22, 81, 102),
+                              ),
+                              controller: searchUserField,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: 'Search for User by Email',
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      height: 40,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/viewProfile');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 22, 81, 102),
+                          foregroundColor: Colors.white,
+                        ),
+                        child: Text('Search',
+                            style: GoogleFonts.manrope(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            )),
+                      ),
+                    ),
+                  ],
+                )),
                 const SizedBox(height: 200),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(width: 150),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton(
+                            onPressed: () {},
+                            child: Text('Create Post',
+                                style: GoogleFonts.manrope(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color.fromARGB(255, 22, 81, 102),
+                                ))),
+                      ],
+                    ),
                     Center(
                       child: FloatingActionButton(
                         onPressed: () {
                           _openModal();
                         },
-                        backgroundColor: Colors.white,
-                        child: const Icon(
-                            color: const Color.fromARGB(255, 22, 81, 102),
-                            Icons.add),
+                        backgroundColor: const Color.fromARGB(255, 22, 81, 102),
+                        child: const Icon(color: Colors.white, Icons.add),
                       ),
                     ),
                   ],

@@ -2,7 +2,6 @@ import 'package:ashesi_social/auth/login_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:ashesi_social/auth/login_auth.dart';
 import 'package:provider/provider.dart';
 
 var headers = {'Content-Type': 'application/json'};
@@ -107,12 +106,16 @@ Future<Map<String, dynamic>> getProfileData(String email) async {
   request.headers.addAll(headers);
   http.StreamedResponse response = await request.send();
 
-  if (response.statusCode == 200) {
-    var data = await response.stream.bytesToString();
-    return json.decode(data);
-  } else {
-    return {};
-  }
+  // if (response.statusCode == 200) {
+  //   var data = await response.stream.bytesToString();
+  //   return json.decode(data);
+  // } else {
+  //   return {
+  //     "message": "Failed to get profile data",
+  //   };
+  // }
+  var data = await response.stream.bytesToString();
+  return json.decode(data);
 }
 
 Future<void> updateProfileData(

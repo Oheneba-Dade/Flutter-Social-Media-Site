@@ -9,6 +9,7 @@ final TextEditingController dateOfBirthField = TextEditingController();
 final TextEditingController yearGroupField = TextEditingController();
 final TextEditingController bestFoodField = TextEditingController();
 final TextEditingController bestMovieField = TextEditingController();
+final TextEditingController searchUserField = TextEditingController();
 
 String majorField = "";
 String residenceStatusField = "";

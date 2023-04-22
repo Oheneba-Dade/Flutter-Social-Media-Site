@@ -35,6 +35,7 @@ Future<void> loginUser(
     Provider.of<UserProvider>(context, listen: false)
         .setUserEmail(loginResponse['email']);
 
+    // ignore: use_build_context_synchronously
     Provider.of<UserProvider>(context, listen: false)
         .setFirstName(loginResponse['firstName']);
     // ignore: use_build_context_synchronously, unused_local_variable

@@ -35,7 +35,7 @@ class PostsList extends StatelessWidget {
               String email = data?['email'] ?? '';
               String content = data?['content'] ?? '';
               return Padding(
-                padding: const EdgeInsets.fromLTRB(10.0, 8.0, 8.0, 10.0),
+                padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 12.0),
                 child: ListTile(
                   title: Text(
                     content,

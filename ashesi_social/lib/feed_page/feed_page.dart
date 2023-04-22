@@ -84,6 +84,28 @@ class FeedPageState extends State<FeedPage> {
                   children: [
                     const SizedBox(width: 50),
                     const Icon(
+                      Icons.update,
+                      size: 40,
+                      color: Color.fromARGB(255, 22, 81, 102),
+                    ),
+                    const SizedBox(width: 10),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/editProfile');
+                        },
+                        child: Text('Update Profile',
+                            style: GoogleFonts.manrope(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: const Color.fromARGB(255, 22, 81, 102),
+                            )))
+                  ],
+                ),
+                const SizedBox(height: 30),
+                Row(
+                  children: [
+                    const SizedBox(width: 50),
+                    const Icon(
                       Icons.logout,
                       size: 40,
                       color: Color.fromARGB(255, 22, 81, 102),
@@ -92,6 +114,17 @@ class FeedPageState extends State<FeedPage> {
                     TextButton(
                         onPressed: () {
                           context.read<UserProvider>().clearUserInfo();
+                          // clear all the controllers
+                          emailField.clear();
+                          passwordField.clear();
+                          firstNameField.clear();
+                          lastNameField.clear();
+                          searchUserField.clear();
+                          dateOfBirthField.clear();
+                          bestFoodField.clear();
+                          bestMovieField.clear();
+                          yearGroupField.clear();
+                          idNumberField.clear();
                           Navigator.pushNamed(context, '/login');
                         },
                         child: Text('Logout',

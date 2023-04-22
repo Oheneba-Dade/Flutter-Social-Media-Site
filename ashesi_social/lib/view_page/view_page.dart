@@ -82,7 +82,7 @@ class ViewProfilePage extends State<ViewProfile> {
                         const Icon(Icons.person, color: Colors.black),
                         const SizedBox(width: 10),
                         Text(
-                          firstName + ' ' + lastName,
+                          '$firstName $lastName',
                           style: GoogleFonts.dancingScript(
                             fontSize: 40,
                             fontWeight: FontWeight.bold,

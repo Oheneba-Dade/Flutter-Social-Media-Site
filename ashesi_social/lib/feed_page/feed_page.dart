@@ -1,11 +1,11 @@
 import 'package:ashesi_social/constants/constants.dart';
-import 'package:ashesi_social/functions/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:ashesi_social/auth/login_auth.dart';
 import 'package:ashesi_social/widgets/ashtales_appbar.dart';
 import 'package:ashesi_social/widgets/post_modal.dart';
+import 'package:ashesi_social/widgets/posts.dart';
 
 class FeedPage extends StatefulWidget {
   const FeedPage({Key? key}) : super(key: key);
@@ -20,12 +20,6 @@ class FeedPageState extends State<FeedPage> {
   void _openModal() {
     setState(() {
       _isModalOpen = true;
-    });
-  }
-
-  void _closeModal() {
-    setState(() {
-      _isModalOpen = false;
     });
   }
 
@@ -69,6 +63,12 @@ class FeedPageState extends State<FeedPage> {
                     const SizedBox(width: 10),
                     TextButton(
                         onPressed: () {
+                          //set search user field to current user
+                          searchUserField.text = context
+                              .read<UserProvider>()
+                              .userEmail
+                              .toString()
+                              .toLowerCase();
                           Navigator.pushNamed(context, '/viewProfile');
                         },
                         child: Text('View Profile',
@@ -107,38 +107,41 @@ class FeedPageState extends State<FeedPage> {
           ),
           Expanded(
             flex: 3,
-            child: SingleChildScrollView(
-              child: Container(
-                color: Colors.white,
-                child: Center(
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 20),
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                'Trending',
-                                style: GoogleFonts.manrope(
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color.fromARGB(255, 22, 81, 102),
-                                ),
+            child: Container(
+              color: Colors.white,
+              child: Center(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'Trending',
+                              style: GoogleFonts.manrope(
+                                fontSize: 35,
+                                fontWeight: FontWeight.bold,
+                                color: const Color.fromARGB(255, 22, 81, 102),
                               ),
                             ),
-                            const Icon(
-                              Icons.newspaper,
-                              size: 40,
-                              color: Color.fromARGB(255, 22, 81, 102),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                          ),
+                          const Icon(
+                            Icons.newspaper,
+                            size: 40,
+                            color: Color.fromARGB(255, 22, 81, 102),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    // appropriately render the PostsList widget when it gets its data
+                    Expanded(
+                      child: PostsList(),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -179,11 +182,11 @@ class FeedPageState extends State<FeedPage> {
                       ],
                     ),
                     const SizedBox(height: 30),
-                    Container(
+                    SizedBox(
                       width: 500,
                       child: Row(
                         children: [
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           Expanded(
                             child: TextField(
                               style: GoogleFonts.manrope(
@@ -198,7 +201,7 @@ class FeedPageState extends State<FeedPage> {
                               ),
                             ),
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                         ],
                       ),
                     ),

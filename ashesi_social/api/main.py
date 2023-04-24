@@ -3,17 +3,33 @@ import firebase_admin
 import constants
 from firebase_admin import firestore
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from datetime import datetime
+import functions_framework
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins='*')
 fire_app = firebase_admin.initialize_app()
 db = firestore.client()
 
 
 USERS_COLLECTION = db.collection("users")
 POSTS_COLLECTION = db.collection("posts")
+
+@cross_origin()
+@functions_framework.http
+def social_api(request):
+    if request.method == "POST" and request.path == "/users":
+        return register_user()
+    elif request.method == "GET" and request.path == "/users":
+        return get_user()
+    elif request.method == "POST" and request.path == "/users/auth":
+        return authenticate_user()
+    elif request.method == "PATCH" and request.path.startswith("/users"):
+        email = request.path.split("/")[-1]
+        return update_user(email)
+    elif request.method == "POST" and request.path == "/posts":
+        return create_post()
 
 
 @app.route("/users", methods=["POST"])

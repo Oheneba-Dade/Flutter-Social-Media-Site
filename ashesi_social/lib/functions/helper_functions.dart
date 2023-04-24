@@ -4,7 +4,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:provider/provider.dart';
 
-var headers = {'Content-Type': 'application/json'};
+var headers = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*'
+};
+String baseURL =
+    "https://us-central1-ashesi-social.cloudfunctions.net/social_api";
 
 /// This function logs in a user by sending a POST request to a specified URL with the user's email and
 /// password, and then sets the user's email and first name using Provider.
@@ -20,7 +25,7 @@ var headers = {'Content-Type': 'application/json'};
 ///   a `Future<void>`.
 Future<void> loginUser(
     BuildContext context, String email, String password) async {
-  String url = "http://127.0.0.1:5000/users/auth";
+  String url = "$baseURL/users/auth";
   var request = http.Request('POST', Uri.parse(url));
 
   request.body = json.encode({"email": email, "password": password});
@@ -87,7 +92,7 @@ Future<void> postProfileData(
     String residenceStatus,
     String bestFood,
     String bestMovie) async {
-  String url = "http://127.0.0.1:5000/users";
+  String url = "$baseURL/users";
   var request = http.Request('POST', Uri.parse(url));
 
   request.body = json.encode({
@@ -144,7 +149,7 @@ Future<void> postProfileData(
 ///   A Future object that resolves to a Map<String, dynamic> containing profile data for the user with
 /// the specified email address.
 Future<Map<String, dynamic>> getProfileData(String email) async {
-  String url = "http://127.0.0.1:5000/users";
+  String url = "$baseURL/users";
   var uri = Uri.parse(url).replace(queryParameters: {"email": email});
   var request = http.Request('GET', uri);
 
@@ -193,7 +198,7 @@ Future<void> updateProfileData(
     String residenceStatus,
     String bestFood,
     String bestMovie) async {
-  String url = "http://127.0.0.1:5000/users/";
+  String url = "$baseURL/users/";
   url += Provider.of<UserProvider>(context, listen: false).userEmail;
   var request = http.Request('PATCH', Uri.parse(url));
 
@@ -250,7 +255,7 @@ Future<void> updateProfileData(
 ///   a `Future<void>`.
 Future<void> createPost(
     BuildContext context, String content, String email) async {
-  String url = "http://127.0.0.1:5000/posts";
+  String url = "$baseURL/posts";
   var request = http.Request('POST', Uri.parse(url));
 
   request.body = json.encode({"content": content, "email": email});

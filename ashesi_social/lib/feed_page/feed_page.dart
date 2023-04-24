@@ -172,7 +172,7 @@ class FeedPageState extends State<FeedPage> {
                     const SizedBox(height: 20),
                     // appropriately render the PostsList widget when it gets its data
                     Expanded(
-                      child: PostsList(),
+                      child: Scaffold(body: PostsList()),
                     ),
                   ],
                 ),

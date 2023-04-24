@@ -111,11 +111,18 @@ def create_post():
         new_doc_ref = POSTS_COLLECTION.document()
         current_time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
         record["postedAt"] = current_time
+        record["likes"] = 0
         new_doc_ref.set(record)
-    except Exception:
-        print(Exception)
+        
+        # Create an empty likes subcollection for the new post
+        likes_collection_ref = new_doc_ref.collection('likes')
+        likes_collection_ref.add({})
+        
+    except Exception as e:
+        print(e)
         return jsonify(constants.INTERNAL_SERVER_ERROR_500), 500
     return jsonify(record), 200
+
 
 
 if __name__ == "__main__":

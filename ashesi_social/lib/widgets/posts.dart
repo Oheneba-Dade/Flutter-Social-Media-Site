@@ -32,11 +32,11 @@ class PostsList extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               Map<String, dynamic> data =
                   snapshot.data!.docs[index].data()! as Map<String, dynamic>;
-              String email = data?['email'] ?? '';
-              String content = data?['content'] ?? '';
-              String postedAt = data?['postedAt'] ?? '';
-              int likes = data?['likes'] ?? 0;
-              bool isLiked = data?['isLiked'] ?? false;
+              String email = data['email'] ?? '';
+              String content = data['content'] ?? '';
+              String postedAt = data['postedAt'] ?? '';
+              int likes = data['likes'] ?? 0;
+              bool isLiked = data['isLiked'] ?? false;
               return Padding(
                 padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 12.0),
                 child: ListTile(

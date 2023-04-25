@@ -15,6 +15,30 @@ db = firestore.client()
 
 USERS_COLLECTION = db.collection("users")
 POSTS_COLLECTION = db.collection("posts")
+MAIL_COLLECTION = db.collection("mail")
+
+
+
+def send_emails():
+    emails = []
+    MOST_RECENT_POST = (
+    POSTS_COLLECTION.order_by("postedAt", direction=firestore.Query.DESCENDING)
+    .limit(1)
+    .get()[0]
+)
+    MOST_RECENT_POST_SENDER = MOST_RECENT_POST.get("email")
+    for user in USERS_COLLECTION.stream():
+        emails.append(user.get("email"))
+    # send email to all users
+    for email in emails:
+        new_doc_ref = MAIL_COLLECTION.document()
+        new_doc_ref.set({
+            "to": email,
+            "message": {
+                "text": f"Hello!, there is a new post on AshTales by {MOST_RECENT_POST_SENDER}. Please check it out.",
+                "subject": "New Post Notification"
+            }
+        })
 
 @cross_origin()
 @functions_framework.http
@@ -117,6 +141,7 @@ def create_post():
         # Create an empty likes subcollection for the new post
         likes_collection_ref = new_doc_ref.collection('likes')
         likes_collection_ref.add({})
+        send_emails()
         
     except Exception as e:
         print(e)

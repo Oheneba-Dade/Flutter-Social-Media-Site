@@ -8,7 +8,7 @@ from datetime import datetime
 import functions_framework
 
 app = Flask(__name__)
-CORS(app, origins='*')
+CORS(app, origins="*")
 fire_app = firebase_admin.initialize_app()
 db = firestore.client()
 
@@ -18,27 +18,33 @@ POSTS_COLLECTION = db.collection("posts")
 MAIL_COLLECTION = db.collection("mail")
 
 
-
 def send_emails():
+    """
+    The function sends an email notification to all users with the most recent post's sender's name and
+    a message to check out the new post on AshTales.
+    """
     emails = []
     MOST_RECENT_POST = (
-    POSTS_COLLECTION.order_by("postedAt", direction=firestore.Query.DESCENDING)
-    .limit(1)
-    .get()[0]
-)
+        POSTS_COLLECTION.order_by("postedAt", direction=firestore.Query.DESCENDING)
+        .limit(1)
+        .get()[0]
+    )
     MOST_RECENT_POST_SENDER = MOST_RECENT_POST.get("email")
     for user in USERS_COLLECTION.stream():
         emails.append(user.get("email"))
     # send email to all users
     for email in emails:
         new_doc_ref = MAIL_COLLECTION.document()
-        new_doc_ref.set({
-            "to": email,
-            "message": {
-                "text": f"Hello!, there is a new post on AshTales by {MOST_RECENT_POST_SENDER}. Please check it out.",
-                "subject": "New Post Notification"
+        new_doc_ref.set(
+            {
+                "to": email,
+                "message": {
+                    "text": f"Hello!, there is a new post on AshTales by {MOST_RECENT_POST_SENDER}. Please check it out.",
+                    "subject": "New Post Notification",
+                },
             }
-        })
+        )
+
 
 @cross_origin()
 @functions_framework.http
@@ -89,6 +95,7 @@ def get_user():
     user_dict = users[0].to_dict()
     return jsonify(user_dict), 200
 
+
 @app.route("/users/auth", methods=["POST"])
 def authenticate_user():
     if not request.data:
@@ -137,17 +144,16 @@ def create_post():
         record["postedAt"] = current_time
         record["likes"] = 0
         new_doc_ref.set(record)
-        
+
         # Create an empty likes subcollection for the new post
-        likes_collection_ref = new_doc_ref.collection('likes')
+        likes_collection_ref = new_doc_ref.collection("likes")
         likes_collection_ref.add({})
         send_emails()
-        
+
     except Exception as e:
         print(e)
         return jsonify(constants.INTERNAL_SERVER_ERROR_500), 500
     return jsonify(record), 200
-
 
 
 if __name__ == "__main__":

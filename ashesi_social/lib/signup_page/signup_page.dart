@@ -30,7 +30,7 @@ class SignUpPage extends State<SignUp> {
                             Column(
                               children: [
                                 Image.asset(
-                                  'images/signup_banner.png',
+                                  'assets/images/signup_banner.png',
                                   width: 600,
                                   height: 550,
                                 )

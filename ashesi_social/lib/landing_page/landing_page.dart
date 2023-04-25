@@ -32,7 +32,7 @@ class LandingPage extends State<Login> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        'images/landing_page_hero.png',
+                        'assets/images/landing_page_hero.png',
                         width: 800,
                         height: 600,
                       ),

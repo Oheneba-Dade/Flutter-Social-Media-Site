@@ -57,7 +57,7 @@ class EditProfilePage extends State<EditProfile> {
               children: [
                 Column(children: [
                   Image.asset(
-                    'images/edit_page.png',
+                    'assets/images/edit_page.png',
                     width: 600,
                     height: 600,
                   ),

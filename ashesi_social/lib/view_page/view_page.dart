@@ -44,16 +44,16 @@ class ViewProfilePage extends State<ViewProfile> {
               ),
             );
           } else {
-            firstName = snapshot.data!['firstName'] ?? "";
-            lastName = snapshot.data!['lastName'] ?? "";
-            idNumber = snapshot.data!['idNumber'] ?? "";
-            email = snapshot.data!['email'] ?? "";
-            dob = snapshot.data!['dateOfBirth'] ?? "";
-            major = snapshot.data!['major'] ?? "";
-            residence = snapshot.data!['residenceStatus'] ?? "";
-            yearGroup = snapshot.data!['yearGroup'] ?? "";
-            bestFood = snapshot.data!['bestFood'] ?? "";
-            bestMovie = snapshot.data!['bestMovie'] ?? "";
+            firstName = snapshot.data!['firstName'] ?? "N/A";
+            lastName = snapshot.data!['lastName'] ?? "N/A";
+            idNumber = snapshot.data!['idNumber'] ?? "N/A";
+            email = snapshot.data!['email'] ?? "N/A";
+            dob = snapshot.data!['dateOfBirth'] ?? "N/A";
+            major = snapshot.data!['major'] ?? "N/A";
+            residence = snapshot.data!['residenceStatus'] ?? "N/A";
+            yearGroup = snapshot.data!['yearGroup'] ?? "N/A";
+            bestFood = snapshot.data!['bestFood'] ?? "N/A";
+            bestMovie = snapshot.data!['bestMovie'] ?? "N/A";
           }
           return Scaffold(
             appBar: const ApplicationToolbar(),
@@ -65,7 +65,7 @@ class ViewProfilePage extends State<ViewProfile> {
                 children: [
                   SizedBox(
                     child: Image.asset(
-                      'images/view_avatar.png',
+                      'assets/images/view_avatar.png',
                       height: 200,
                       width: 200,
                     ),

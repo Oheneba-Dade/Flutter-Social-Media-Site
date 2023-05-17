@@ -2,9 +2,6 @@
 
 This project is a social network developed for Ashesi students to connect with each other. It has 6 main functionalities that will be developed using the concepts of REST API, serverless, cloud deployments, and Flutter.
 
-# Demo GIF
-![Demo GIF](https://github.com/Oheneba-Dade/Flutter-Social-Media-Site/blob/main/Oheneba_Dade.gif)
-
 # Stack
 
 - Flutter (Frontend)
